@@ -27,7 +27,7 @@
         <Label x:Name="LbLfpsRight" Content="0 FPS" Grid.Column="2" Grid.Row="2"></Label>
         <Image x:Name="ImgDistance" Source="C:\Users\lukas\Pictures\2000px-FuBK_testcard_vectorized.svg.png" Stretch="Uniform" Grid.Column="4" Grid.Row="0"></Image>
         
-        <Slider x:Name="sldPhi" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Value="1.8" IsSnapToTickEnabled="True" TickFrequency="0.0001" Minimum="0" Maximum="10" ValueChanged="SldPhi_OnValueChanged_ValueChanged"></Slider>
+        <Slider x:Name="sldPhi" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Value="1.8" IsSnapToTickEnabled="True" TickFrequency="0.00001" Minimum="0" Maximum="10" ValueChanged="SldPhi_OnValueChanged_ValueChanged"></Slider>
         <Label Content="{Binding ElementName=sldPhi, Path=Value}" Grid.Column="4" Grid.Row="3"></Label>
         <Label x:Name="LblMessage" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="4"></Label>
     </Grid>

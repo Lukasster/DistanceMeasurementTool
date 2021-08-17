@@ -22,8 +22,14 @@ namespace DistanceCalculator
 
             IOutputArray outAr = outImage.GetOutputArray().GetMat();
 
-            IInputArray sourceAr = source.ToImage<Bgr, Byte>().GetInputArray().GetMat();
-            IInputArray paternAr = pattern.ToImage<Bgr, Byte>().GetInputArray().GetMat();
+            IOutputArray sourceAr = source.ToImage<Bgr, Byte>().GetInputArray().GetMat();
+            IOutputArray paternAr = pattern.ToImage<Bgr, Byte>().GetInputArray().GetMat();
+            
+            CvInvoke.CvtColor(sourceAr, sourceAr, ColorConversion.Bgr2Gray);
+            CvInvoke.CvtColor(paternAr, paternAr, ColorConversion.Bgr2Gray);
+            
+            CvInvoke.EqualizeHist(paternAr, paternAr);
+            CvInvoke.EqualizeHist(paternAr, paternAr);
 
             CvInvoke.MatchTemplate(sourceAr, paternAr, outAr, TemplateMatchingType.CcoeffNormed);
             double min_val = 0, max_val = 0;

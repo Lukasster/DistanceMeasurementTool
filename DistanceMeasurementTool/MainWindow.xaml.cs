@@ -116,9 +116,6 @@ namespace DistanceMeasurementTool
         // continue UI blocking?
         private void SpecificDistance()
         {
-            PatternResult resR;
-            PatternResult resL;
-
             while (true)
             {
 ////                Console.WriteLine("Test");
@@ -130,23 +127,19 @@ namespace DistanceMeasurementTool
                 {
                     try
                     {
-                        resR =
+                        currentPatternResRight =
                             _distanceCalculator.FindPattern(currentRight, currentPattern.GetPattern());
-                        resL =
+                        currentPatternResLeft =
                             _distanceCalculator.FindPattern(currentLeft, currentPattern.GetPattern());
 
-                        var r = resR;
-                        var l = resL;
-                        currentPatternResLeft = resL;
-                        currentPatternResRight = resR;
-                        double distance = CalcDistance(r.MaxLoc.X, l.MaxLoc.X);
+                        double distance = CalcDistance(currentPatternResRight.MaxLoc.X, currentPatternResLeft.MaxLoc.X);
 //                        Console.WriteLine(distance);
 
                         Dispatcher.Invoke(() =>
                         {
                             LblMessage.Content = distance;
-                            ImgLeft.Source = resL.OutMap.ToImageSource();
-                            ImgRight.Source = resR.OutMap.ToImageSource();
+                            ImgLeft.Source = currentPatternResLeft.OutMap.ToImageSource();
+                            ImgRight.Source = currentPatternResRight.OutMap.ToImageSource();
                             isLeftNew = isRightNew = false;
                         });
                     }
@@ -192,11 +185,21 @@ namespace DistanceMeasurementTool
             isRightNew = true;
 //            bmp = (Bitmap)bmp.Clone();
 
-            if (currentPatternResRight != null)
-            {
-                Graphics g = Graphics.FromImage(bmp);
-                g.DrawRectangle(new Pen(Color.Blue), new Rectangle(currentPatternResRight.MaxLoc, currentPattern.Size));
-            }
+// fixme not exactly real time :)
+//            Console.WriteLine(currentPatternResRight != null);
+//            Bitmap tempBitmap = new Bitmap(bmp.Width, bmp.Height);
+//            using (Graphics g = Graphics.FromImage(tempBitmap))
+//            {
+//                g.DrawImage(bmp, 0, 0);
+//                if (currentPatternResRight != null)
+//                {
+//
+//                    g.DrawRectangle(new Pen(Color.Blue),
+//                        new Rectangle(currentPatternResRight.MaxLoc, currentPattern.Size));
+//
+//                }
+//            }
+
             Dispatcher.Invoke(() =>
             {
 //                if (!marked)
